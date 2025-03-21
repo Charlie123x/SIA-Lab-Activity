@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Digital Autobiography</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Profile Creation Section -->
+  <div id="profile-creation" class="container">
+    <h1>Create Your Profile</h1>
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" id="name" />
+    </div>
+    <div class="form-group">
+      <label>Birthday:</label>
+      <input type="date" id="birthday" />
+    </div>
+    <div class="form-group">
+      <label>Bio / About Me:</label>
+      <textarea id="bio"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Favorite Quote:</label>
+      <input type="text" id="quote" />
+    </div>
+    <div class="form-group">
+      <label>Upload Profile Picture:</label>
+      <input type="file" id="profilePic" accept="image/*" />
+    </div>
+    <button id="createProfileBtn">Create Profile</button>
+  </div>
+
+  <!-- Profile Feed Section -->
+  <div id="profile-feed" class="container hidden">
+    <div id="profile-header" class="header">
+      <div class="photo-container">
+        <img id="profileImage" src="" alt="Profile Photo" />
+      </div>
+      <div class="details">
+        <h2 id="profileName">Your Name</h2>
+        <p id="profileBirthday">Your Birthday</p>
+        <p id="profileBio">About Me</p>
+        <p id="profileQuote">Favorite Quote</p>
+      </div>
+    </div>
+
+    <div id="post-section">
+      <textarea id="tweetInput" placeholder="Enter text here..."></textarea>
+      <button id="postButton">Post</button>
+    </div>
+
+    <div id="tweets" class="tweets-container"></div>
+  </div>
+
+  <!-- Audio Element -->
+  <audio id="postAudio">
+    <source src="Video Ringtone - Crazy Frog.mp3" type="audio/mpeg">
+    <source src="Video Ringtone - Crazy Frog.mp3" type="audio/ogg">
+  </audio>
+
+  <script>
+
+    const createProfileBtn = document.getElementById('createProfileBtn');
+    createProfileBtn.addEventListener('click', function() {
+
+      const name = document.getElementById('name').value;
+      const birthday = document.getElementById('birthday').value;
+      const bio = document.getElementById('bio').value;
+      const quote = document.getElementById('quote').value;
+      const profilePic = document.getElementById('profilePic').files[0];
+
+      document.getElementById('profile-creation').classList.add('hidden');
+      document.getElementById('profile-feed').classList.remove('hidden');
+
+      document.getElementById('profileName').textContent = name;
+      document.getElementById('profileBirthday').textContent = `Birthday: ${birthday}`;
+      document.getElementById('profileBio').textContent = `About Me: ${bio}`;
+      document.getElementById('profileQuote').textContent = `Favorite Quote: "${quote}"`;
+
+      // Display profile image
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('profileImage').src = e.target.result;
+      };
+      if (profilePic) reader.readAsDataURL(profilePic);
+    });
+
+    const postButton = document.getElementById('postButton');
+    postButton.addEventListener('click', function() {
+      const tweetText = document.getElementById('tweetInput').value.trim();
+      const audio = document.getElementById('postAudio');
+
+      if (tweetText === '') {
+        alert('Please write something before posting!');
+        // Stop sound if it's playing
+        audio.pause();
+        audio.currentTime = 0; // Reset sound position to the beginning
+        return;
+      }
+
+      // Check if the post contains inappropriate content (Example: If the text contains the word "bad")
+      const badWords = ['bad', 'inappropriate', 'offensive']; // Example list of bad words
+      let isBadPost = badWords.some(word => tweetText.toLowerCase().includes(word));
+
+      if (isBadPost) {
+        alert('Inappropriate post detected! Sound will be stopped.');
+        // Stop sound if it's playing
+        audio.pause();
+        audio.currentTime = 0; // Reset sound position to the beginning
+        return;
+      }
+
+      const tweet = document.createElement('div');
+      tweet.classList.add('tweet');
+
+      const tweetContent = document.createElement('p');
+      tweetContent.textContent = tweetText;
+
+      const likeButton = document.createElement('button');
+      likeButton.classList.add('like-button');
+      likeButton.innerHTML = '❤️';
+
+      likeButton.addEventListener('click', function(event) {
+        event.stopPropagation();
+        this.classList.toggle('liked');
+      });
+
+      tweet.appendChild(tweetContent);
+      tweet.appendChild(likeButton);
+
+      // Play sound for a valid post
+      audio.play();
+
+      document.getElementById('tweets').appendChild(tweet);
+
+      document.getElementById('tweetInput').value = '';
+    });
+  </script>
+  
+</body>
+</html>

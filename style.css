@@ -1,0 +1,139 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: #1a1a1a;
+    background-image: url(https://wallpapers.com/images/high/galaxy-background-n4qpk3fehv1fb7eh.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(44, 44, 44, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    background: url(https://i.gifer.com/VIR.gif);
+    background-size: cover;
+    box-shadow: 2px 1px; 
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-sizing: border-box;
+    background-color: white;
+  }
+  
+  textarea {
+    resize: none;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  #profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .photo-container img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+    border: 2px solid #fff;
+  }
+  
+  #post-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  #tweetInput {
+    flex: 1;
+    height: 80px;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .tweets-container {
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+  }
+  
+  .tweet {
+    background-color: transparent;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .tweet p {
+    margin: 0;
+    color: #fff;
+    flex: 1;
+  }
+  
+  .like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: white;
+    transition: color 0.3s, transform 0.2s;
+  }
+  
+  .like-button.liked {
+    color: red;
+    transform: scale(1.2);
+  }
