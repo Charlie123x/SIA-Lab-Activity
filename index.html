@@ -8,7 +8,6 @@
 </head>
 <body>
 
-  <!-- Profile Creation Section -->
   <div id="profile-creation" class="container">
     <h1>Create Your Profile</h1>
     <div class="form-group">
@@ -34,7 +33,6 @@
     <button id="createProfileBtn">Create Profile</button>
   </div>
 
-  <!-- Profile Feed Section -->
   <div id="profile-feed" class="container hidden">
     <div id="profile-header" class="header">
       <div class="photo-container">
@@ -56,15 +54,27 @@
     <div id="tweets" class="tweets-container"></div>
   </div>
 
+  <!-- Profile Creation Sound -->
+  <audio id="profileCreationAudio">
+    <source src="ssstik.io_1741454359798.mp3" type="audio/mpeg">
+    <source src="ssstik.io_1741454359798.mp3" type="audio/ogg">
+  </audio>
+
+  <!-- Post Sound -->
   <audio id="postAudio">
-    <source src="Video Ringtone - Crazy Frog.mp3" type="audio/mpeg">
-    <source src="Video Ringtone - Crazy Frog.mp3" type="audio/ogg">
+    <source src="ssstik.io_1741454359798.mp3" type="audio/mpeg">
+    <source src="ssstik.io_1741454359798.mp3" type="audio/ogg">
   </audio>
 
   <script>
 
     const createProfileBtn = document.getElementById('createProfileBtn');
+    const profileCreationAudio = document.getElementById('profileCreationAudio'); // New audio element for profile creation click
+
     createProfileBtn.addEventListener('click', function() {
+
+      // Play the profile creation click sound
+      profileCreationAudio.play();
 
       const name = document.getElementById('name').value;
       const birthday = document.getElementById('birthday').value;
@@ -95,21 +105,18 @@
 
       if (tweetText === '') {
         alert('Please write something before posting!');
-        // Stop sound if it's playing
         audio.pause();
-        audio.currentTime = 0; // Reset sound position to the beginning
+        audio.currentTime = 0;
         return;
       }
 
-      // Check if the post contains inappropriate content (Example: If the text contains the word "bad")
-      const badWords = ['bad', 'inappropriate', 'offensive']; // Example list of bad words
+      const badWords = ['bad', 'inappropriate', 'offensive'];
       let isBadPost = badWords.some(word => tweetText.toLowerCase().includes(word));
 
       if (isBadPost) {
         alert('Inappropriate post detected! Sound will be stopped.');
-        // Stop sound if it's playing
         audio.pause();
-        audio.currentTime = 0; // Reset sound position to the beginning
+        audio.currentTime = 0;
         return;
       }
 
@@ -131,7 +138,6 @@
       tweet.appendChild(tweetContent);
       tweet.appendChild(likeButton);
 
-      // Play sound for a valid post
       audio.play();
 
       document.getElementById('tweets').appendChild(tweet);
